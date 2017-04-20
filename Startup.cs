@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EventLog.Dao;
+using EventLog.FreeGeoIp;
+using EventLog.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +32,13 @@ namespace event_log
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddSingleton<EventService, EventService>();
+            services.AddSingleton<CryptoService, CryptoService>();
+
+            services.AddSingleton<EventDataDao, EventDataDao>();
+
+            services.AddSingleton<FreeGeoIpClient, FreeGeoIpClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

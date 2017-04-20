@@ -1,8 +1,0 @@
-D:\projects\event-log\bin\Debug\netcoreapp1.1\event-log.deps.json
-D:\projects\event-log\bin\Debug\netcoreapp1.1\event-log.runtimeconfig.json
-D:\projects\event-log\bin\Debug\netcoreapp1.1\event-log.runtimeconfig.dev.json
-D:\projects\event-log\bin\Debug\netcoreapp1.1\event-log.dll
-D:\projects\event-log\bin\Debug\netcoreapp1.1\event-log.pdb
-D:\projects\event-log\obj\Debug\netcoreapp1.1\event-log.AssemblyInfo.cs
-D:\projects\event-log\obj\Debug\netcoreapp1.1\event-log.dll
-D:\projects\event-log\obj\Debug\netcoreapp1.1\event-log.pdb

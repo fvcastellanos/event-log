@@ -1,18 +1,25 @@
+@model EventLog.Model.EventData
+
 @{
     ViewData["Title"] = "Login";
 }
 <h2>@ViewData["Title"]</h2>
 
 <div class="col-md-offset-2 col-md-6">
-    <form>
+
+    @using (Html.BeginForm("HandleLogin", "Login", FormMethod.Post)) 
+    {
         <div class="form-group">
             <label for="user">User</label>
-            <input type="text" id="user" class="form-control" placeholder="User" />
+            @Html.TextBoxFor(model => model.User, new { @class = "form-control", @placeholder = "User", @id = "user" } )
+            <!--<input type="text" id="user" class="form-control" placeholder="User" />-->
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" class="form-control" placeholder="Password" />
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password", @id = "password" } )
+            <!--<input type="password" id="password" class="form-control" placeholder="Password" />-->
         </div>
-        <input type="submit" id="login" class="btn btn-default" value="Login" />
-    </form>
+        <input type="submit" id="login" class="btn btn-default" value="Login"/>
+    }
+
 </div>
