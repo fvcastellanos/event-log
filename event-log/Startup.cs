@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EventLog.Dao;
+﻿using EventLog.Dao;
 using EventLog.FreeGeoIp;
 using EventLog.Service;
 using Microsoft.AspNetCore.Builder;
