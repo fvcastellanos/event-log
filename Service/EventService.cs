@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using EventLog.Dao;
 using EventLog.FreeGeoIp;
 using EventLog.Model;
@@ -26,7 +27,39 @@ namespace EventLog.Service
         {
             _logger.LogInformation(eventData.ToString());
             _eventDataDao.saveEvent(eventData);
-            var geoIp = _freeGeoIpClient.GetGeoIpInformation("cavitos.net");
+        }
+
+        public void GetEvents()
+         {
+            var events = _eventDataDao.GetEvents();
+            var userEventMap = BuildUserDataMap(events);
+
+        }
+
+        private UserData GetUserData(string user, IDictionary<string, UserData> userDataMap)
+        {
+            if (!userDataMap.ContainsKey(user))
+            {
+                userDataMap[user] = new UserData(new List<EventInformation>());
+            }
+
+            return userDataMap[user];
+        }
+
+        private IDictionary<string, UserData> BuildUserDataMap(IList<EventData> events) 
+        {
+            var userMap = new Dictionary<string, UserData>();
+
+            foreach (EventData e in events)
+            {
+                var geoIpTask = _freeGeoIpClient.GetGeoIpInformation(e.Ip);
+                var eventInformation = new EventInformation(e, geoIpTask.Result);
+                
+                var userData = GetUserData(e.User, userMap);
+                userData.EventsList.Add(eventInformation);
+            }
+
+            return userMap;
         }
     }
 }

@@ -35,7 +35,9 @@ namespace EventLog.Controllers
             _eventData = buildEventData(user, password);
             _eventService.LogEvent(_eventData);
 
-            return View("Index");
+            ViewData["user"] = _eventData.User;
+
+            return View("Welcome");
         }
 
         private EventData buildEventData(string user, string password)

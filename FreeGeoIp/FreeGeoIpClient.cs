@@ -21,13 +21,15 @@ namespace EventLog.FreeGeoIp
             var serializer = new DataContractJsonSerializer(typeof(GeoIp));
 
             string url = FreeIpUri + domain;
-            EventLog.Model.GeoIp geoIp = null;
+            GeoIp geoIp = null;
             HttpResponseMessage response = await _client.GetAsync(url);
+            
             if (response.IsSuccessStatusCode)
             {
                 var streamTask = response.Content.ReadAsStreamAsync();
                 geoIp = serializer.ReadObject(await streamTask) as GeoIp;
             }
+
             return geoIp;
         }        
     }
