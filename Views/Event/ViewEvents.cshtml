@@ -23,6 +23,12 @@
                     var eventInfoList = @userData.EventsList;
 
                     <tr>
+                        <td>
+                            @if (@userData.HasAlert)
+                            {
+                                <input type="button" class="btn btn-danger" value="Alert" />
+                            }
+                        </td>
                         <td>@key</td>
                         <td>
                             <table class="table table-stripped">

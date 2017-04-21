@@ -64,11 +64,37 @@ namespace EventLog.Service
                 
                 var userData = GetUserData(e.User, userMap);
                 userData.EventsList.Add(eventInformation);
+                VerifyAlert(userData);
             }
 
             return userMap;
         }
 
+        private void VerifyAlert(UserData userData)
+        {
+            EventData old = null;
+            var change = 1;
+            foreach (EventInformation info in userData.EventsList)
+            {
+                if(old == null)
+                {
+                    old = info.Event;
+                }
+                else
+                {
+                    if (!old.UserAgent.Equals(info.Event.UserAgent) && (old.EventDate.Subtract(info.Event.EventDate).Hours < 1))
+                    {
+                        change++;
+                        old = info.Event;
+                    }
+                }
+            }
+
+            if(change >= 2)
+            {
+                userData.HasAlert = true;
+            }
+        }
         private string GetRandomDomain()
         {
             var domainList = new List<string>();
