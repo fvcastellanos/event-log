@@ -1,4 +1,4 @@
 event-data.txt
-bin/*
-obj/*
-.vscode/*
+**/bin/**
+**/obj/**
+**/.vscode/**
