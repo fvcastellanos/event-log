@@ -17,7 +17,7 @@ namespace EventLog.Controllers
 
             var map = _eventService.GetEvents();
 
-            return View();
+            return View(map);
         }
     }
 }

@@ -1,10 +1,54 @@
+@model System.Collections.Generic.Dictionary<string, EventLog.Model.UserData>
+
+@{
+
+    
+}
+
 <div class="row">
     <div class="col-md-6">
 
         <h1>Events</h1>
-            <p>
-                asdf
-            </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var key in Model.Keys)
+                {
+                    var userData = @Model[@key];
+
+                    var eventInfoList = @userData.EventsList;
+
+                    <tr>
+                        <td>@key</td>
+                        <td>
+                            <table class="table table-stripped">
+                                <thead>
+                                    <tr>
+                                        <th>Password</th>
+                                        <th>Event Date</th>
+                                        <th>IP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var eventInfo in eventInfoList)
+                                    {
+                                        <tr>
+                                            <td>@eventInfo.Event.Password</td>
+                                            <td>@eventInfo.Event.EventDate</td>
+                                            <td><input type="button" class="btn btn-primary" value="@eventInfo.Event.Ip" /></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
     <div class="col-md-6">
         <h1>Map</h1>

@@ -16,11 +16,14 @@ namespace EventLog.Service
 
         private FreeGeoIpClient _freeGeoIpClient;
 
-        public EventService(ILogger<EventService> logger, EventDataDao eventDataDao, FreeGeoIpClient freeGeoIpClient)
+        private CryptoService _cryptoService;
+
+        public EventService(ILogger<EventService> logger, EventDataDao eventDataDao, FreeGeoIpClient freeGeoIpClient, CryptoService cryptoService)
         {
             _logger = logger;
             _eventDataDao = eventDataDao;
             _freeGeoIpClient = freeGeoIpClient;
+            _cryptoService = cryptoService;
         }
 
         public void LogEvent(EventData eventData)
@@ -54,6 +57,7 @@ namespace EventLog.Service
             foreach (EventData e in events)
             {
                 var geoIpTask = _freeGeoIpClient.GetGeoIpInformation(e.Ip);
+                e.Password = _cryptoService.DecryptTextAes(e.Password);
                 var eventInformation = new EventInformation(e, geoIpTask.Result);
                 
                 var userData = GetUserData(e.User, userMap);
