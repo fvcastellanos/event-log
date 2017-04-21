@@ -1,6 +1,4 @@
 
-using System.Runtime.Serialization;
-
 namespace EventLog.Model
 {
     public class GeoIp
