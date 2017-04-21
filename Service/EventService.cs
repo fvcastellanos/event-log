@@ -29,11 +29,12 @@ namespace EventLog.Service
             _eventDataDao.saveEvent(eventData);
         }
 
-        public void GetEvents()
+        public IDictionary<string, UserData> GetEvents()
          {
             var events = _eventDataDao.GetEvents();
             var userEventMap = BuildUserDataMap(events);
 
+            return userEventMap;
         }
 
         private UserData GetUserData(string user, IDictionary<string, UserData> userDataMap)
