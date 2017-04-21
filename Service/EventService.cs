@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using EventLog.Dao;
 using EventLog.FreeGeoIp;
@@ -56,7 +57,8 @@ namespace EventLog.Service
 
             foreach (EventData e in events)
             {
-                var geoIpTask = _freeGeoIpClient.GetGeoIpInformation(e.Ip);
+                // var geoIpTask = _freeGeoIpClient.GetGeoIpInformation(e.Ip);
+                var geoIpTask = _freeGeoIpClient.GetGeoIpInformation(GetRandomDomain());
                 e.Password = _cryptoService.DecryptTextAes(e.Password);
                 var eventInformation = new EventInformation(e, geoIpTask.Result);
                 
@@ -65,6 +67,30 @@ namespace EventLog.Service
             }
 
             return userMap;
+        }
+
+        private string GetRandomDomain()
+        {
+            var domainList = new List<string>();
+
+            domainList.Add("cavitos.net");
+            domainList.Add("wikipedia.org");
+            domainList.Add("google.com");
+            domainList.Add("umg.edu.gt");
+            domainList.Add("usac.edu.gt");
+            domainList.Add("microsoft.com");
+            domainList.Add("facebook.com");
+            domainList.Add("amazon.com");
+            domainList.Add("gmail.com");
+            domainList.Add("xibalbanetwork.com");
+            domainList.Add("gog.com");
+            domainList.Add("spotify.com");
+            domainList.Add("movistar.com");
+
+            Random d = new Random();
+            var index = d.Next(0, domainList.Count - 1);
+
+            return domainList[index];
         }
     }
 }

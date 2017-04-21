@@ -39,7 +39,10 @@
                                         <tr>
                                             <td>@eventInfo.Event.Password</td>
                                             <td>@eventInfo.Event.EventDate</td>
-                                            <td><input type="button" class="btn btn-primary" value="@eventInfo.Event.Ip" /></td>
+                                            <td>
+                                                <input type="button" class="btn btn-primary" value="@eventInfo.Event.Ip" 
+                                                    onclick="addMark(@eventInfo.GeoInfo.latitude, @eventInfo.GeoInfo.longitude)" />
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -61,17 +64,31 @@
 {
     <script>
           function initMap() {
-            var uluru = { lat: -25.363, lng: 131.044 };
+            var uluru = { lat: 0, lng: 0 };
             var map = new google.maps.Map(document.getElementById('map'), {
               zoom: 4,
               center: uluru
             });
 
+            /*var marker = new google.maps.Marker({
+              position: uluru,
+              map: map
+            });*/
+          }
+
+        function addMark(lat, long) {
+            var uluru = { lat: lat, lng: long} ;
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 4,
+              center: uluru
+            });
+            
             var marker = new google.maps.Marker({
               position: uluru,
               map: map
             });
-          }
+        }
 
     </script>
 
