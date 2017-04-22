@@ -90,7 +90,7 @@ namespace EventLog.Service
                 }
             }
 
-            if(change >= 2)
+            if(change >= 5)
             {
                 userData.HasAlert = true;
             }
